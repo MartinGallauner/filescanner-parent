@@ -20,5 +20,6 @@ services:
     volumes:
       - /home/mg/Downloads:/data
     environment:
-      - scanner.folder.path="/data"
+      - spring.datasource.url=jdbc:postgresql://database:5432/scanner
+      - scanner.folder.path=/data
 
