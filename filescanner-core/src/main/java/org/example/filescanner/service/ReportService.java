@@ -23,7 +23,7 @@ public class ReportService {
     private final NodeRepository nodeRepository;
 
     public List<String> getFolders() {
-        Set<Node> allFolders = nodeRepository.findAllByTypeIs(NodeTypeEnum.DIRECTORY);
+        Set<Node> allFolders = nodeRepository.findAllByTypeIs(NodeTypeEnum.DIR);
         return allFolders.stream()
                 .map(Node::getPath)
                 .collect(Collectors.toSet())
@@ -38,6 +38,8 @@ public class ReportService {
      */
     public List<String> getFoldersWithSizes(String extension) {
         // TODO implement
+
+        // I want to use an recursive call to iterate over every node of the tree
         return new ArrayList<>();
     }
 }

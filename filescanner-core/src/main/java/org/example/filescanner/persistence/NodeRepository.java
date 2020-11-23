@@ -14,11 +14,4 @@ public interface NodeRepository extends JpaRepository<Node, Long> {
     Set<Node> findAllByTypeIs(NodeTypeEnum type);
 
     Set<Node> findAllByPathIs(String parentPath);
-
-    @Modifying
-    @Query(
-            value = "truncate table scanner.node",
-            nativeQuery = true
-    )
-    void truncateNodeTable();
 }

@@ -37,24 +37,23 @@ public class ScannerService {
 
     @Transactional
     public void purgeDatabase() {
-        nodeRepository.truncateNodeTable();
+        nodeRepository.deleteAll();
     }
 
     @PostConstruct
     @Transactional
     public List<NodeDto> scanFolder() {
+        nodeRepository.deleteAll();
+
         List<Node> nodes = new ArrayList<>();
 
         try (Stream<Path> stream = Files.walk(Paths.get(path))) {
             nodes = stream.map(this::buildNode)
                     .map(nodeRepository::save)
-
                     .collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         return nodes.stream()
                 .map(this::setChildNodes)
                 .map(this::mapNode)
@@ -62,7 +61,7 @@ public class ScannerService {
     }
 
     private Node setChildNodes(Node parent) {
-        Set<Node> childNodes = nodeRepository.findAllByPathIs(parent.getPath() + "/" + parent.getName());
+        Set<Node> childNodes = nodeRepository.findAllByPathIs(parent.getPath());
         for (Node child : childNodes) {
             child.setParent(parent);
         }
@@ -86,7 +85,7 @@ public class ScannerService {
                 .name(path.getFileName().toString())
                 .path(path.toString())
                 .scanDate(LocalDateTime.now())
-                .type(Files.isDirectory(path) ? NodeTypeEnum.DIRECTORY : NodeTypeEnum.FILE)
+                .type(Files.isDirectory(path) ? NodeTypeEnum.DIR : NodeTypeEnum.FILE)
                 .size(!Files.isDirectory(path) ? readFileSize(path) : null)
                 .build();
     }
