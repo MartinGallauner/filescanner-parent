@@ -7,12 +7,6 @@
         <artifactId>filescanner-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <properties>
-        <sonar.projectKey>MartinGallauner_filescanner-parent</sonar.projectKey>
-        <sonar.organization>martingallauner</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    </properties>
-
 
     <artifactId>filescanner-core</artifactId>
 
