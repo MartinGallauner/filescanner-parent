@@ -18,6 +18,9 @@
 
     <properties>
         <java.version>15</java.version>
+        <sonar.projectKey>MartinGallauner_filescanner-parent</sonar.projectKey>
+        <sonar.organization>martingallauner</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <modules>
